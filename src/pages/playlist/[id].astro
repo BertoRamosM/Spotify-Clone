@@ -3,27 +3,39 @@ import Layout from "../../layouts/Layout.astro";
 import { allPlaylists, playlists, songs } from "../../lib/data";
 import PlayListItemCard from "../../components/PlayListItemCard.astro";
 
-const {id}= Astro.params
+const { id } = Astro.params;
 
-const playlist = allPlaylists.find(playlist => playlist.id === id)
+const playlist = allPlaylists.find((playlist) => playlist.id === id);
 
-const playListSongs = songs.filter(song => song.albumId === playlist?.albumId)
+const playListSongs = songs.filter(
+  (song) => song.albumId === playlist?.albumId
+);
 ---
 
 <Layout title="Spotify clone">
   <div
     id="playlist-container"
-    class="relative transition-all duration-1000 bg-green-800"
+    class="relative flex flex-col bg-zinc-900 overflow-x-hidden"
+    transition:name=`playlist${id} box`
   >
     <!--Navigation header -->
+    <header>
+      <picture class="aspect-square h-52 w-52 flex-none">
+        <img
+          src={playlist?.cover}
+          alt={`Cover of ${playlist?.title}`}
+          class="object-cover w-full h-full rounded-md"
+          transition:name=`playlist ${playlist?.id} image`
+        />
+      </picture>
+    </header>
 
-    <div class="relative z-10 px-6 pt-10">     
-      </div>
+    <div class="relative z-10 px-6 pt-10"></div>
 
-      <div
-        class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80 -z-[1]"
-      >
-      </div>
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80 -z-[1]"
+    >
+    </div>
   </div>
   <style></style>
 </Layout>
