@@ -46,6 +46,8 @@ const Player = () => {
   
   const audioRef = useRef();
 
+  const [volume, setVolume] = useState(0.5);
+
   useEffect(() => {
     isPlaying ? 
       audioRef.current.play() : 
@@ -57,11 +59,18 @@ const Player = () => {
     if (song) {
       const src = `/music/${playlist?.id}/0${song.id}.mp3`
       audioRef.current.src = src
+      audioRef.current.volume = volume
       audioRef.current.play()
-      audioRef.current.volume = 0.1
     }
 
   },[currentMusic])
+
+  const handleVolumeChange = (value) => {
+    const [newVolume] = value
+    const volumeValue = newVolume / 100;
+    setVolume(volumeValue)
+    audioRef.current.volume = volumeValue
+  }
 
   const handleClick = () => {
     setIsPlaying(!isPlaying);
@@ -79,11 +88,8 @@ const Player = () => {
         </div>
       </div>
       <div className="grid place-content-center">
-        <Slider defaultValue={[100]} max={100} min={0} step={1} className="w-[95px] bg-zinc-500 rounded-xl"
-          onValueChange={(value) => {
-            const newVolume = value
-            audioRef.current.volume = newVolume / 100
-          }
+        <Slider defaultValue={[50]} max={100} min={0} step={1} className="w-[95px] bg-zinc-500 rounded-xl"
+          onValueChange={handleVolumeChange
           }/>
       </div>
 
