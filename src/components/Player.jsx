@@ -27,18 +27,20 @@ export const Play = ({ className }) => (
   </svg>
 );
 
-const CurrentSong = ({image, title}) => {
+const CurrentSong = ({ image, title, artists }) => {
+  const artistString = artists.join(", ");
   return (
     <div className="flex items-center gap-5 relative overflow-hidden">
       <picture className="w-16 h-16 bg-zinc-800 rounded-md shadow-lg overflow-hidden ">
         <img src={image} alt={title} />
       </picture>
-      <h3 className="font-bold block">
-        {title}
-      </h3>
+      <div>
+        <h3 className="font-bold block">{title}</h3>
 
+        <p className="text-zinc-300">{artistString}</p>
+      </div>
     </div>
-  )
+  );
 }
 const Player = () => {
   const {isPlaying, setIsPlaying, currentMusic} = usePlayerStore(state => state)
