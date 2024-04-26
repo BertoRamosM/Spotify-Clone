@@ -15,13 +15,17 @@ const CardPlayButton = ({ id }) => {
       setIsPlaying(false)
       return
     }
-    fetch(`api/get-info-playlist.json?id${id}`)
+    fetch(`/api/get-info-playlist.json?id=${id}`)
       .then(res => res.json())
       .then((data) => {
         const { songs, playlist } = data
         setIsPlaying(true)
-        setCurrentMusic({songs, playlist, song:songs[0]})
-    })
+        setCurrentMusic({ songs, playlist, song: songs[0] })
+            
+        
+
+      })
+    
   }
 
   const isPlayingPlaylist = isPlaying && currentMusic?.playlist.id === id

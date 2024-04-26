@@ -2,7 +2,7 @@ import { allPlaylists, songs as allSongs } from "../../lib/data";
 
 export async function GET({ params, request }) {
   //get the id from the url search params
-  const { url } = response
+  const { url } = request
   const urlObject = new URL(url)
   const id = urlObject.searchParams.get('id')
 
