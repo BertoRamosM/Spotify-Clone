@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { usePlayerStore } from "../store/playerStore";
-
+import { Slider } from "./Slider";
 export const Pause = ({ className }) => (
   <svg
     className={className}
@@ -28,16 +28,15 @@ export const Play = ({ className }) => (
 );
 
 const CurrentSong = ({ image, title, artists }) => {
-  const artistString = artists.join(", ");
   return (
     <div className="flex items-center gap-5 relative overflow-hidden">
       <picture className="w-16 h-16 bg-zinc-800 rounded-md shadow-lg overflow-hidden ">
         <img src={image} alt={title} />
       </picture>
-      <div>
+      <div className="flex flex-col">
         <h3 className="font-bold block">{title}</h3>
 
-        <p className="text-zinc-300">{artistString}</p>
+        <p className="text-zinc-300 text-xs">{artists?.join(", ")}</p>
       </div>
     </div>
   );
@@ -59,6 +58,7 @@ const Player = () => {
       const src = `/music/${playlist?.id}/0${song.id}.mp3`
       audioRef.current.src = src
       audioRef.current.play()
+      audioRef.current.volume = 0.1
     }
 
   },[currentMusic])
@@ -70,7 +70,7 @@ const Player = () => {
     <div className="flex flex-row justify-between w-full px-4 z-50">
       <div>
         <CurrentSong {...currentMusic.song} />
-        </div>
+      </div>
       <div className="grid place-content-center gap-4 flex-1">
         <div className="flex justify-center">
           <button className="bg-white rounded-full p-2" onClick={handleClick}>
@@ -78,7 +78,14 @@ const Player = () => {
           </button>
         </div>
       </div>
-      <div className="grid place-content-center"></div>
+      <div className="grid place-content-center">
+        <Slider defaultValue={[100]} max={100} min={0} step={1} className="w-[95px] bg-zinc-500 rounded-xl"
+          onValueChange={(value) => {
+            const newVolume = value
+            audioRef.current.volume = newVolume / 100
+          }
+          }/>
+      </div>
 
       <audio ref={audioRef} />
     </div>
