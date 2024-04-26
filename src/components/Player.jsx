@@ -80,7 +80,7 @@ const Player = () => {
   );
 
   const audioRef = useRef();
-  const prevVolumeRef = useRef(50); // Initialize prevVolumeRef outside of the component
+  const prevVolumeRef = useRef(50); 
 
   const [volume, setVolume] = useState(0.5);
 
@@ -96,7 +96,7 @@ const Player = () => {
       audioRef.current.volume = volume;
       audioRef.current.play();
     }
-  }, [currentMusic, volume]);
+  }, [currentMusic]);
 
   const handleVolumeChange = (value) => {
     const [newVolume] = value;
@@ -106,7 +106,7 @@ const Player = () => {
     audioRef.current.volume = volumeValue;
   };
 
-  const isVolumeSilence = volume < 0.1
+  const isVolumeSilence = volume === 0
 
   const handleVolumeSilence = () => {
     if (isVolumeSilence) {
@@ -116,6 +116,10 @@ const Player = () => {
       setVolume(0) 
     }
   }
+
+    useEffect(() => {
+      audioRef.current.volume = volume;
+    }, [volume]);
 
 
 
@@ -139,7 +143,7 @@ const Player = () => {
 
       <div className="flex items-center gap-x-2">
         <button onClick={handleVolumeSilence}>
-          {volume === 0 ? (
+          {isVolumeSilence ? (
             <VolumeSilenceIcon  />
           ) : (
             <VolumeIcon />
@@ -147,6 +151,7 @@ const Player = () => {
         </button>
         <div className="grid place-content-center">
           <Slider
+            value={[volume * 100]}
             defaultValue={[50]}
             max={100}
             min={0}
