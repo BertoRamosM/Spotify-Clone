@@ -26,6 +26,20 @@ export const Play = ({ className }) => (
     <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"></path>
   </svg>
 );
+
+const CurrentSong = ({image, title}) => {
+  return (
+    <div className="flex items-center gap-5 relative overflow-hidden">
+      <picture className="w-16 h-16 bg-zinc-800 rounded-md shadow-lg overflow-hidden ">
+        <img src={image} alt={title} />
+      </picture>
+      <h3 className="font-bold block">
+        {title}
+      </h3>
+
+    </div>
+  )
+}
 const Player = () => {
   const {isPlaying, setIsPlaying, currentMusic} = usePlayerStore(state => state)
   
@@ -44,7 +58,7 @@ const Player = () => {
       audioRef.current.src = src
       audioRef.current.play()
     }
-    
+
   },[currentMusic])
 
   const handleClick = () => {
@@ -52,7 +66,9 @@ const Player = () => {
   };
   return (
     <div className="flex flex-row justify-between w-full px-4 z-50">
-      <div>Current Song</div>
+      <div>
+        <CurrentSong {...currentMusic.song} />
+        </div>
       <div className="grid place-content-center gap-4 flex-1">
         <div className="flex justify-center">
           <button className="bg-white rounded-full p-2" onClick={handleClick}>
