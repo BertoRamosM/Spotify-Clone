@@ -42,7 +42,7 @@ const CurrentSong = ({ image, title, artists }) => {
   );
 }
 
-export const VolumeSilence = () => (
+export const VolumeSilenceIcon = () => (
   <svg
     fill="currentColor"
     role="presentation"
@@ -57,7 +57,7 @@ export const VolumeSilence = () => (
   </svg>
 );
 
-export const Volume = () => (
+export const VolumeIcon = () => (
   <svg
     fill="currentColor"
     role="presentation"
@@ -119,10 +119,19 @@ const Player = () => {
           </button>
         </div>
       </div>
-      <div className="grid place-content-center">
-        <Slider defaultValue={[50]} max={100} min={0} step={1} className="w-[95px] bg-zinc-500 rounded-xl"
-          onValueChange={handleVolumeChange
-          }/>
+
+      <div className="flex items-center gap-2">
+        {volume === 0 ? <VolumeSilenceIcon /> : <VolumeIcon />}
+        <div className="grid place-content-center">
+          <Slider
+            defaultValue={[50]}
+            max={100}
+            min={0}
+            step={1}
+            className="w-[95px] bg-zinc-500 rounded-xl"
+            onValueChange={handleVolumeChange}
+          />
+        </div>
       </div>
 
       <audio ref={audioRef} />
