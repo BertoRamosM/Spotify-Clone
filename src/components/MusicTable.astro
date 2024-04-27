@@ -1,21 +1,28 @@
 ---
 import Time from "../icons/Time.astro";
 import { type Song } from "../lib/data";
+import CardPlayButton from "./CardPlayButton";
+import type { Playlist } from "../lib/data";
+
 
 interface Props {
   songs: Song[];
+  playlist: Playlist;
 }
 
-const { songs } = Astro.props;
+const { songs, playlist } = Astro.props;
+
+const { id } = playlist;
 ---
 
-<table class="table-auto text-left min-w-full divide-y-2 divided-gray-500/50">
+<table class="table-auto text-left min-w-full divide-y-1 divided-gray-500/50">
   <thead class="">
     <tr class="text-gray-300 text-sm font-light">
       <th class="px-4 py-2">#</th>
+      <th class="px-4 py-2"></th>
       <th class="px-4 py-2">Title</th>
       <th class="px-4 py-2">Album</th>
-      <th class="px-4 py-2">{<Time />}</th>
+      <th class="px-4 py-2">{(<Time />)}</th>
     </tr>
   </thead>
 
@@ -24,6 +31,13 @@ const { songs } = Astro.props;
       songs.map((song, index) => (
         <tr class="text-gray-300 text-sm font-light">
           <td class="px-4 py-2">{index + 1}</td>
+          <td>
+            <CardPlayButton
+              id={id}
+              className={"card-play-button rounded-full bg-green-500 p-2"}
+              client:visible
+            />
+          </td>
           <td class="px-4 py-2 flex gap-3">
             <picture class="">
               <img

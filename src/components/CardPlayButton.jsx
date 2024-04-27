@@ -2,7 +2,7 @@ import { Pause, Play } from "./Player"
 import { usePlayerStore } from "../store/playerStore"
 
 
-const CardPlayButton = ({ id }) => {
+const CardPlayButton = ({ id, className }) => {
   const {
     currentMusic,
     isPlaying,
@@ -29,7 +29,7 @@ const CardPlayButton = ({ id }) => {
   const isPlayingPlaylist = isPlaying && currentMusic?.playlist.id === id
 
   return (
-    <button className="card-play-button rounded-full bg-green-500 p-4"
+    <button className={className}
     onClick={handleClick}>
       {isPlayingPlaylist ? <Pause/> : <Play/>}
     </button>
