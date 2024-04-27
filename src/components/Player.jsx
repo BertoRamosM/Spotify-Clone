@@ -115,7 +115,7 @@ const SongControl = ({ audio }) => {
         className="w-[400px] rounded-xl"
         onValueChange={handleSliderChange}
       />
-      <span className="opacity-50">{formatTime(duration)}</span>
+      <span className="opacity-50">{duration ? formatTime(duration) : null}</span>
     </div>
   );
 };
@@ -173,7 +173,7 @@ const Player = () => {
 
   return (
     <div className="flex flex-row justify-between w-full px-4 z-50">
-      <div>
+      <div className="w-[200px]">
         <CurrentSong {...currentMusic.song} />
       </div>
       <div className="grid place-content-center gap-4 flex-1">
