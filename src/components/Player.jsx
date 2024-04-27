@@ -142,7 +142,7 @@ const Player = () => {
       </div>
 
       <div className="flex items-center gap-x-2">
-        <button onClick={handleVolumeSilence}>
+        <button onClick={handleVolumeSilence} className="opacity-70 hover:opacity-100 transition-all duration-150">
           {isVolumeSilence ? (
             <VolumeSilenceIcon  />
           ) : (
