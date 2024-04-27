@@ -74,6 +74,39 @@ export const VolumeIcon = ({ onClick }) => (
   </svg>
 );
 
+const SongControl = ({audio}) => {
+  const [currentTime, setCurrentTime] = useState(0)
+  
+  useEffect(() => {
+    audio.current.addEventListener("timeupdate", handleTimeUpdate)
+    return () => {
+      audio.current.removeEventListener("timeupdate", handleTimeUpdate)
+    }
+  },[])
+}
+
+const handleTimeUpdate = () => {
+  setCurrentTime(audio.current.currentTime)
+
+  return (
+    <div>
+      <span>00:00</span>
+      <Slider
+        value={[currentTime]}
+        defaultValue={[0]}
+        max={audio?.current?.duration ?? 0}
+        min={0}
+        step={1}
+        className="w-[500px] bg-zinc-500 rounded-xl"
+        onValueChange={(value) => {
+          audio.current.currentTime = value
+        }}
+      />
+      <span>00:00</span>
+    </div>
+  );
+}
+
 const Player = () => {
   const { isPlaying, setIsPlaying, currentMusic } = usePlayerStore(
     (state) => state
