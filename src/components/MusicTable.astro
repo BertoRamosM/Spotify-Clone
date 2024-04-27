@@ -1,0 +1,23 @@
+---
+import Time from "../icons/Time.astro";
+import { type Song } from "../lib/data";
+
+interface Props {
+  songs: Song[];
+}
+
+const { songs } = Astro.props;
+---
+
+<table class="table-auto text-left min-w-full divide-y-2 divided-gray-500/50">
+  <thead class="">
+    <tr class="">
+      <th class="px-4 py-2">Title</th>
+      <th class="px-4 py-2">Artist</th>
+      <th class="px-4 py-2">Album</th>
+      <th class="px-4 py-2">Length</th>
+    </tr>
+  </thead>
+
+  <tbody> </tbody>
+</table>
