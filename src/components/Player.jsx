@@ -96,13 +96,16 @@ const SongControl = ({ audio }) => {
     if (time === null) return '0,00'
     
     const seconds = Math.floor(time % 60)
+    const minutes = Math.floor(time / 60)
+
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`
   }
 
   const duration = audio?.current?.duration || 0;
 
   return (
     <div className="flex gap-x-3 text-xs pt-2">
-      <span className="opacity-50">{(currentTime * 60) / 100}</span>
+      <span className="opacity-50">{formatTime(currentTime)}</span>
       <Slider
         value={[currentTime]}
         defaultValue={[0]}
@@ -112,7 +115,7 @@ const SongControl = ({ audio }) => {
         className="w-[400px] rounded-xl"
         onValueChange={handleSliderChange}
       />
-      <span className="opacity-50">{duration / 60}</span>
+      <span className="opacity-50">{formatTime(duration)}</span>
     </div>
   );
 };
