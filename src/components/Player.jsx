@@ -112,7 +112,7 @@ const SongControl = ({ audio }) => {
         max={duration}
         min={0}
         step={1}
-        className="w-[400px] rounded-xl"
+        className="w-[450px] rounded-xl"
         onValueChange={handleSliderChange}
       />
       <span className="opacity-50">{duration ? formatTime(duration) : null}</span>
@@ -199,7 +199,7 @@ const Player = () => {
             max={100}
             min={0}
             step={1}
-            className="w-[100px] bg-zinc-500 rounded-xl"
+            className="w-[105px] bg-zinc-500 rounded-xl"
             onValueChange={handleVolumeChange}
           />
         </div>

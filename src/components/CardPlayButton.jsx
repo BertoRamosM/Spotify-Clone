@@ -21,7 +21,7 @@ const CardPlayButton = ({ id, className }) => {
         const { songs, playlist } = data
         setIsPlaying(true)
         setCurrentMusic({ songs, playlist, song: songs[0] })
-
+        
       })
     
   }
