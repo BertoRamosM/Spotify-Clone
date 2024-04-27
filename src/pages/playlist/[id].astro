@@ -1,5 +1,5 @@
 ---
-import MusicTable from "@/components/MusicTable";
+import MusicTable from "@/components/MusicTable.astro";
 import Layout from "../../layouts/Layout.astro";
 
 import { allPlaylists, songs } from "../../lib/data";
@@ -64,7 +64,7 @@ const playListSongs = songs.filter(
     </div>
 
     <section>
-      <MusicTable id={id} songs={songs}/>
+      <MusicTable songs={playListSongs}/>
     </section>
   </div>
 </Layout>
