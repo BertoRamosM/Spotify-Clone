@@ -3,6 +3,7 @@ import MusicTable from "@/components/MusicTable.astro";
 import Layout from "../../layouts/Layout.astro";
 
 import { allPlaylists, songs } from "../../lib/data";
+import CardPlayButton from "@/components/CardPlayButton";
 
 const { id } = Astro.params;
 
@@ -10,7 +11,6 @@ const playlist = allPlaylists.find((playlist) => playlist.id === id);
 const playListSongs = songs.filter(
   (song) => song.albumId === playlist?.albumId
 );
-
 ---
 
 <Layout title="Spotify Clone">
@@ -46,13 +46,21 @@ const playListSongs = songs.filter(
               <span>{playlist?.artists.join(", ")}</span>
             </div>
             <p class="mt-1">
-              <span class="text-white">{playListSongs.length} canciones</span>,
-              3 h aproximadamente
+              <span class="text-white">{playListSongs.length} songs</span>, 3 h
+              aprox
             </p>
           </div>
         </div>
       </div>
     </header>
+
+    <div class="pl-8 pt-8 ">
+      <CardPlayButton
+        id={id}
+        className={"card-play-button rounded-full bg-green-500 p-4 hover:opacity-75 transition-all"}
+        client:visible
+      />
+    </div>
 
     <div class="pl-6 pt-6"></div>
 
@@ -64,7 +72,7 @@ const playListSongs = songs.filter(
     </div>
 
     <section>
-      <MusicTable songs={playListSongs}/>
+      <MusicTable songs={playListSongs} />
     </section>
   </div>
 </Layout>

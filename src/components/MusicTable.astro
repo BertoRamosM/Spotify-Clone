@@ -1,5 +1,4 @@
 ---
-import CardPlayButton from "./CardPlayButton";
 import Time from "../icons/Time.astro";
 import { type Song } from "../lib/data";
 
@@ -14,8 +13,8 @@ const { songs } = Astro.props;
   class="table-auto text-left min-w-full divide-y-1 divided-gray-500/50 mx-4"
 >
   <thead class="">
-    <tr class="text-gray-300 text-sm font-light">
-      <th class="px-4 py-2">#</th>
+    <tr class="text-gray-400 text-sm font-light">
+      <th class="px-4 py-2 w-[1rem]">#</th>
       <th class="px-4 py-2"></th>
       <th class="px-4 py-2">Title</th>
       <th class="px-4 py-2">Album</th>
@@ -29,11 +28,7 @@ const { songs } = Astro.props;
         <tr class="text-gray-300 text-sm font-light hover:bg-zinc-600 rounded-lg overflow-hidden">
           <td class="px-4 py-2">{index + 1}</td>
           <td>
-            <CardPlayButton
-              id={song.id}
-              className={"card-play-button rounded-full bg-green-500 p-2 hover:opacity-75 transition-all"}
-              client:visible
-            />
+            
           </td>
           <td class="px-4 py-2 flex gap-3">
             <picture class="">
